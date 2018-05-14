@@ -16,10 +16,10 @@ class CreateClientPaymentTransactionsTable extends Migration
         Schema::create('client_payment_transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id');
-            $table->integer('contract_id');
-            $table->integer('amount');
-            $table->integer('type_of_payment'); // 1=كاش 2=شيك
             $table->integer('employee_id')->nullable();
+            $table->integer('contract_id');
+            $table->integer('value');
+            $table->integer('type_of_payment'); // 1=كاش 2=شيك
             $table->timestamps();
         });
     }

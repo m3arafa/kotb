@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\newCtrl;
 
+use App\Branch;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,6 @@ class BranchController extends Controller
         return view('reports/branch_report');
 
     }
-
 
 
     public function getAll()
@@ -51,6 +51,41 @@ class BranchController extends Controller
     {
 
         $messages = [
+            'name.required' => 'اسم الفرع مطلوب',
+            'name.unique' => 'اسم الفرع موجود بالفعل',
+            'address.required' => 'العنوان مطلوب',
+            'logo.required' => 'الصورة مطلوبة'
+        ];
+
+        $rules = [
+            'name' => 'required|unique:branches,name',
+            'address' => 'required',
+            'logo' => 'required | mimes:jpeg,png,bmp,jpg',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
+        $name = null;
+
+        if ($file = $request->file('logo')) {
+            $name = time() . $file->getClientOriginalName();
+            $file->move('public/img', $name);
+        }
+
+        $input = [
+            'name' => $request->name,
+            'address' => $request->address,
+            'logo' => $name,
+        ];
+
+        Branch::create($input);
+
+        return back()->with([
+            'success' => 'تم الحفظ بنجاح'
+        ]);
+
+/*
+        $messages = [
             'branch_name.required' => 'اسم الفرع مطلوب',
             'branch_name.unique' => 'اسم الفرع موجود بالفعل',
             'address.required' => 'العنوان مطلوب',
@@ -84,8 +119,7 @@ class BranchController extends Controller
         return back()->with([
             'success' => 'تم الحفظ بنجاح'
         ]);
-
-
+*/
     }
 
     public function deleteBranch(Request $request)
@@ -100,6 +134,7 @@ class BranchController extends Controller
         return back();
     }
 
+
     public function updateBranch(Request $request)
     {
         $branch_update = Branch::findorfail($request->b_id);
@@ -110,14 +145,14 @@ class BranchController extends Controller
         ];
 
         $rules = [
-            'branch_name' => 'required|unique:branches,name,'.$branch_update->id,
+            'branch_name' => 'required|unique:branches,name,' . $branch_update->id,
             'address' => 'required',
 //            'logo' => 'required | mimes:jpeg,png,bmp,jpg',
         ];
 
         $this->validate($request, $rules, $messages);
 
-        if($branch_update){
+        if ($branch_update) {
 
             $branch_img = $branch_update->logo;
 
@@ -139,7 +174,7 @@ class BranchController extends Controller
             $branch_update->save();
             return redirect()->route('AddBranch')->with(['success' => 'تم التعديل بنجاح']);
 
-        }else{
+        } else {
             return redirect()->back()->with(['error' => 'dfdsgdgdf']);
         }
 
@@ -151,7 +186,7 @@ class BranchController extends Controller
 
         $branches = Branch::where('item_id', $this->id)->get();
 
-        $its_branches  = $item->branches();
+        $its_branches = $item->branches();
 
     }
 

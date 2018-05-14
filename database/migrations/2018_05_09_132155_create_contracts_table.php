@@ -17,7 +17,7 @@ class CreateContractsTable extends Migration
             $table->increments('id');
             $table->integer('client_id');
             $table->integer('number_of_containers');
-            $table->integer('type_of_payment'); // مقدم , آجل
+            $table->integer('type_of_payment'); // 1 =  مقدم 2 = آجل
             $table->date('from_date');
             $table->date('to_date');
             $table->integer('cost');

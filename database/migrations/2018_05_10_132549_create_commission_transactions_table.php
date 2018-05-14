@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommissionsTable extends Migration
+class CreateCommissionTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateCommissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('commissions', function (Blueprint $table) {
+        Schema::create('commission_transactions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('client_id');
+            $table->integer('employee_id');
+            $table->integer('rent_id');
+            $table->string('commission_type');
+            $table->integer('value');
+            $table->text('notes');
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ class CreateCommissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commissions');
+        Schema::dropIfExists('commissions_transactions');
     }
 }

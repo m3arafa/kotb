@@ -4,21 +4,22 @@
 @stop
 @section('container')
 
+
     <div class="row">
         <div class="col-lg-12 ibox float-e-margins ibox-content text-center p-md">
 
-            <form method="post" enctype="multipart/form-data" action="{{ route('branches.store') }}">
+            <form  role="form" method="post" enctype="multipart/form-data" action="{{ route('branches.store')  }}">
 
                 {{ csrf_field() }}
                 <div class=" col-md-12 form-group float-e-margins">
                     <label class="font-normal col-md-2"><h4>إسم الفرع</h4></label>
                     <div class="col-md-6">
-                        <input id="branch_name" placeholder="أدخل اسم الفرع " class="form-control" type="text"
-                               name="branch_name">
+                        <input id="name" placeholder="أدخل اسم الفرع " class="form-control" type="text"
+                               name="name">
                     </div>
                 </div>
                 <div class=" col-md-12 form-group float-e-margins">
-                    <label class="font-normal col-md-2"><h4>إسم الفرع</h4></label>
+                    <label class="font-normal col-md-2"><h4>العنوان </h4></label>
                     <div class="col-md-6">
                         <input id="address"  name="address" placeholder="العنوان" class="form-control" type="text"
                                value="">
@@ -32,7 +33,7 @@
                                 <span class="btn btn-default btn-file"><span
                                             class="fileinput-new">اختر الشعار</span><span
                                             class="fileinput-exists">تغيير</span>
-                                    <input type="file" name="logo" class="form-control"></span>
+                                    <input type="file" name="logo" id="logo"  class="form-control"></span>
                         <span class="fileinput-filename"></span>
                         <a href="#" class="close fileinput-exists" data-dismiss="fileinput"
                            style="float: none">&times;</a>
@@ -42,11 +43,20 @@
                 </div>
 
 
-                <button class="col-md-2 btn btn-block btn-success" style="" id="save_print">حفظ
+                <button class="col-md-2 btn btn-block btn-success" type="submit" style="" id="save_print">حفظ
                 </button>
             </form>
 
         </div>
+
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+            </div>
+
+        @endif
 
     </div>
 
@@ -67,7 +77,6 @@
 
 
                 <tbody>
-
 
                 <tr>
                     <td>اسم الفرع </td>

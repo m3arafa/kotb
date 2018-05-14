@@ -17,9 +17,9 @@ class CreateTrucksTable extends Migration
             $table->increments('id');
             $table->integer('employee_id');
             $table->integer('number');
-            $table->integer('oil_change_from');
-            $table->integer('oil_change_to');
             $table->integer('read_now');
+            $table->integer('oil_change_from_date');
+            $table->integer('oil_change_to_date');
             $table->date('kamashat_change_date');
             $table->date('battery_change_date');
             $table->date('ghatas_air_from_date');

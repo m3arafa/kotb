@@ -18,10 +18,10 @@ class CreateRentsTable extends Migration
             $table->integer('client_id');
             $table->integer('driver_id');
             $table->integer('supervisor_id');
-            $table->integer('driver_commission');
-            $table->integer('supervisor_commission');
             $table->integer('contract_id')->nullable();
             $table->integer('container_id');
+            $table->integer('driver_commission');
+            $table->integer('supervisor_commission');
             $table->integer('cost');
             $table->date('from_date');
             $table->date('to_date');
