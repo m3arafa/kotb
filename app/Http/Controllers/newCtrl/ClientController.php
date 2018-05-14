@@ -9,14 +9,6 @@ use Illuminate\Http\Request;
 class ClientController extends Controller
 {
 
-
-    public function getClients()
-    {
-
-        return view('reports/client_reports');
-
-    }
-
     public function getClientAdd()
     {
 
@@ -24,17 +16,49 @@ class ClientController extends Controller
 
     }
 
-    public function store(Request $reques)
+    public function storeClient(Request $reques)
     {
+
+        $rules = [
+            'name' => 'required',
+            'number' => 'required|unique:clients,number',
+            'phone' => 'required|unique:clients,phone',
+            'address' => 'required',
+            'credit_limit' => 'required'
+        ];
+
+        $messages = [
+            'name.required' => 'الإسم مطلوب',
+            'number.required' => 'رقم العميل مطلوب',
+            'number.unique' => 'رقم العميل موجود بالفعل',
+            'phone.required' => 'برجاء إدخال رقم الهاتف',
+            'phone.unique' => 'رقم الموبايل موجود بالفعل',
+            'address.required' => 'العنوان مطلوب',
+            'credit_limit.required' => 'برجاء إدخال الحد الإئتمانى للعميل'
+        ];
+
+
+        $this->validate($reques, $rules, $messages);
 
 
         $input = $reques->all();
 
-//        return $input;
-
         Client::create($input);
 
-        return redirect()->back();
+        return back()->with([
+            'success' => 'تم إضافة العميل بنجاح'
+        ]);
+
+    }
+
+
+//    --------------------------------------------------------------
+
+
+    public function getClients()
+    {
+
+        return view('reports/client_reports');
 
     }
 

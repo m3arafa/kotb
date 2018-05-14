@@ -4,7 +4,7 @@
 
 @stop
 @section('container')
-    <form role="form" method="POST" action="{{url('AddWorker')}}">
+    <form role="form" method="POST" action="{{ route('employee.store')}}">
 
         {!! csrf_field() !!}
 
@@ -22,9 +22,9 @@
                 <label class="font-normal col-md-2"><h4>الوظيفه</h4></label>
                 <div class="col-md-4">
                     <select id="job" name="job" class="form-control" class="chosen-select">
-                        <option>حدد وظيفه العامل</option>
-                        <option value="supervisor">مشرف</option>
-                        <option value="driver">سائق</option>
+                        <option value="">تحديد الوظيفة</option>
+                        <option value="1">مشرف</option>
+                        <option value="2">سائق</option>
                     </select>
                 </div>
             </div>
@@ -32,7 +32,7 @@
             <div class=" col-md-12 form-group float-e-margins">
                 <label class="font-normal col-md-2"><h4>رقم الاقامه </h4></label>
                 <div class="col-md-4">
-                    <input type="text" id="residency_number" name="residency_number" class="form-control">
+                    <input type="number" id="residency_number" name="residency_number" class="form-control">
                 </div>
             </div>
             <div class="col-md-12 float-e-margins form-group ">
@@ -68,7 +68,8 @@
                     <div class="col-md-6">
                         <div class="input-group date">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                            <input type="date" class="form-control" id="medical_insurance_end_date">
+                            <input type="date" class="form-control" id="medical_insurance_end_date"
+                                   name="medical_insurance_end_date">
                         </div>
                     </div>
                 </div>
@@ -93,4 +94,25 @@
         </div>
 
     </form>
+    <div class="col-lg-10">
+
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </div>
+
+        @endif
+        @if(session()->has('success'))
+
+            <p class="alert alert-success">{{ session('success') }}</p>
+
+        @endif
+
+        @if(session()->has('error'))
+            <p class="alert alert-danger">{{ session('error') }}</p>
+
+        @endif
+    </div>
 @stop

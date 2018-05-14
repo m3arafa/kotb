@@ -16,10 +16,10 @@ class CreateTrucksTable extends Migration
         Schema::create('trucks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id');
-            $table->integer('number');
+            $table->integer('number')->unique();
             $table->integer('read_now');
-            $table->integer('oil_change_from_date');
-            $table->integer('oil_change_to_date');
+            $table->integer('oil_change_from');
+            $table->integer('oil_change_to');
             $table->date('kamashat_change_date');
             $table->date('battery_change_date');
             $table->date('ghatas_air_from_date');
@@ -29,7 +29,7 @@ class CreateTrucksTable extends Migration
             $table->date('end_deal_paper_date');
             $table->date('end_insurance_date');
             $table->date('end_work_card_date');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

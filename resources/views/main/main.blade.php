@@ -104,7 +104,7 @@
                         <li><a href="{{route('AddWorker')}}">إضافه عمال</a></li>
                         <li><a href="{{route('AddClient')}}">إضافه عميل</a></li>
                         <li><a href="{{route('AddTruck')}}">اضافه شاحنه</a></li>
-                        <li><a href="{{route('ConfigurePayment')}}">تعريف مصرفات يوميه</a></li>
+                        <li><a href="{{route('AddSpending')}}">تعريف مصرفات يوميه</a></li>
                     </ul>
                 </li>
 

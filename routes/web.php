@@ -25,16 +25,19 @@ Route::get('/IncomeSave', ['as' => 'IncomeSave', 'uses' => 'IncomeSavecontroller
 
 Route::get('/DailyPayment', ['as' => 'DailyPayment', 'uses' => 'DailyPaymentcontroller@getDailyPayment']);
 
-Route::get('/ConfigurePayment', ['as' => 'ConfigurePayment', 'uses' => 'ConfigurePaymentcontroller@getConfigurePayment']);
 
 Route::get('/DailyRentReport', ['as' => 'DailyRentReport', 'uses' => 'DailyRentReportController@getDailyRentReport']);
 
 Route::get('/sales', ['as' => 'sales', 'uses' => 'salesController@getSales']);
 
 
+// Spending
+Route::get('/addSpending', ['as' => 'AddSpending', 'uses' => 'SpendingController@getAddSpending']);
+Route::post('/storeSpending', ['as' => 'spending.store', 'uses' => 'SpendingController@storeSpending']);
+
+
 Route::namespace('newCtrl')->group(function () {
 
-    Route::get('/AddContainer', ['as' => 'AddContainer', 'uses' => 'ContainerController@getAddContainer']);
 
     Route::get('/SearchContainer', ['as' => 'SearchContainer', 'uses' => 'ContainerController@getSearchContainer']);
 
@@ -60,10 +63,6 @@ Route::namespace('newCtrl')->group(function () {
     Route::get('/ShowContract', ['as' => 'ShowContract', 'uses' => 'ContractController@getShowContract']);
 
 
-    Route::get('/AddUser', ['as' => 'AddUser', 'uses' => 'UserController@getAddUser']);
-
-
-    Route::get('/AddTruck', ['as' => 'AddTruck', 'uses' => 'TruckController@getAddTruck']);
 
 
     Route::get('test-a/{id}', 'ContractController@test');
@@ -79,17 +78,31 @@ Route::namespace('newCtrl')->group(function () {
 
 // Client
     Route::get('/AddClient', ['as' => 'AddClient', 'uses' => 'ClientController@getClientAdd']);
-    Route::post('/AddClient', 'ClientController@store');
+    Route::post('/storeClient', ['as' => 'client.store', 'uses' => 'ClientController@storeClient']);
 
 //  employee
     Route::get('/AddWorker', ['as' => 'AddWorker', 'uses' => 'WorkerController@getAddWorker']);
-    Route::post('/AddWorker', 'WorkerController@store');
+    Route::post('/storeEmployee', [ 'as' => 'employee.store', 'uses' => 'WorkerController@storeEmployee']);
 
-//   Branch
+//  Branch
     Route::get('/AddBranch', ['as' => 'AddBranch', 'uses' => 'BranchController@getAll']);
-    Route::get('/editBranch/{id}', ['as' => 'branch.edit', 'uses' => 'BranchController@getBranch']);
+    Route::get('/editBranch/{id}', ['as' => 'branch.edit', 'uses' => 'BranchController@editBranch']);
     Route::post('/deleteBranch', ['as' => 'branch.delete', 'uses' => 'BranchController@deleteBranch']);
     Route::post('/updateBranch', ['as' => 'branch.update', 'uses' => 'BranchController@updateBranch']);
-    Route::post('/store-branch', ['as' => 'branches.store', 'uses' => 'BranchController@storeBranch']);
+    Route::post('/store-branch', ['as' => 'branch.store', 'uses' => 'BranchController@storeBranch']);
+
+//  Container
+    Route::get('/AddContainer', ['as' => 'AddContainer', 'uses' => 'ContainerController@addContainer']);
+    Route::post('/storeContainer', ['as' => 'container.store', 'uses' => 'ContainerController@storeContainer']);
+
+//  User
+    Route::get('/AddUser', ['as' => 'AddUser', 'uses' => 'UserController@getAddUser']);
+    Route::post('/storeUser', ['as' => 'user.store', 'uses' => 'UserController@storeUser']);
+
+
+//    Truck
+    Route::get('/AddTruck', ['as' => 'AddTruck', 'uses' => 'TruckController@getAddTruck']);
+    Route::post('/storeTruck', ['as' => 'truck.store', 'uses' => 'TruckController@storeTruck']);
+
 
 });

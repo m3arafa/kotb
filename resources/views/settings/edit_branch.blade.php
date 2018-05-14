@@ -24,7 +24,6 @@
     @if(session()->has('error'))
         <p class="alert alert-danger">{{ session('error') }}</p>
 
-
     @endif
 
 
@@ -37,7 +36,7 @@
 
                 {{ csrf_field() }}
 
-                <input type="hidden" name="b_id" value="{{ $branch->id }}">
+                <input type="hidden" name="branch_id" value="{{ $branch->id }}">
 
                 <div class=" col-md-12 form-group float-e-margins">
                     <label class="font-normal col-md-2"><h4>إسم الفرع</h4></label>
@@ -60,7 +59,7 @@
                     <div class="fileinput fileinput-new col-md-4" data-provides="fileinput">
                                 <span class="btn btn-default btn-file"><span
                                             class="fileinput-new">اختر الشعار</span><span
-                                            class="fileinput-exists">تغيير</span>
+                                            class="fileinput-exists"> للتغيير</span>
                                     <input type="file" name="logo" class="form-control"></span>
                         <span class="fileinput-filename"></span>
                         <a href="#" class="close fileinput-exists" data-dismiss="fileinput"
