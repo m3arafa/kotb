@@ -18,7 +18,7 @@ class CreateCommissionTransactionsTable extends Migration
             $table->integer('client_id');
             $table->integer('employee_id');
             $table->integer('rent_id');
-            $table->string('commission_type');
+            $table->string('commission_type'); // تفريغ , تحصيل إيراد , إيجار حاوية
             $table->integer('value');
             $table->text('notes');
             $table->timestamps();

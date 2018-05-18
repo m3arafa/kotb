@@ -175,10 +175,20 @@
         $(".picker").calendarsPicker({
             // calendar: $.calendars.instance('ummalqura'),
             dateFormat: 'Y-mm-dd',
-            defaultDate: "0",
+             defaultDate: "0",
             selectDefaultDate: true
 
         });
+
+        $(".picker-plus-3").calendarsPicker({
+            // calendar: $.calendars.instance('ummalqura'),
+            dateFormat: 'Y-mm-dd',
+             defaultDate: "3",
+            selectDefaultDate: true
+
+        });
+
+
 
 
     })

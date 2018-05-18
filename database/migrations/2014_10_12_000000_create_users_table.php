@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
 //                ->on('branches')
 //                ->onUpdate('cascade')
 //                ->onDelete('cascade');
-//
+
             $table->rememberToken();
             $table->timestamps();
         });

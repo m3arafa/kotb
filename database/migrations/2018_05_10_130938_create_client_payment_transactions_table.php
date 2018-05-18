@@ -20,6 +20,8 @@ class CreateClientPaymentTransactionsTable extends Migration
             $table->integer('contract_id');
             $table->integer('value');
             $table->integer('type_of_payment'); // 1=كاش 2=شيك
+            $table->integer('cheque_number')->nullable();
+            $table->date('transaction_date');
             $table->timestamps();
         });
     }

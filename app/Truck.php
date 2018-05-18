@@ -25,4 +25,9 @@ class Truck extends Model
         'end_work_card_date',
         'notes'
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo('App\Truck');
+    }
 }

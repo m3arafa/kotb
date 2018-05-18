@@ -6,117 +6,158 @@
 @section('container')
     <div class="row col-lg-12 ibox float-e-margins ibox-content text-center p-md">
 
-        <div class=" col-md-12 form-group float-e-margins">
-            <label class="col-md-2" for="contract_number"><h4>رقم العقد</h4></label>
-            <div class="col-md-4">
-                <input id="contract_number" name="bill_number" placeholder="برجاء ادخال رقم العقد "
-                       class=" form-control"
-                       type="text" value="">
-            </div>
-        </div>
+        <form role="form" method="POST" action="{{route('contract.store')}}">
+            {{csrf_field()}}
 
-        <div class=" col-md-12 form-group float-e-margins">
-            <label class="font-normal col-md-2"><h4>العميل</h4></label>
-            <div class="col-md-4">
-                <select class="form-control" class="chosen-select">
-                    <option value="">Select</option>
-                    <option value="container_id">نقدى</option>
-                    <option value="container_id">عميل 1</option>
-                    <option value="container_id">عميل 2</option>
-                    <option value="container_id">عميل 3</option>
-                    <option value="container_id">عميل 4</option>
-                    <option value="container_id">عميل 5</option>
-                </select>
+            <div class=" col-md-12 form-group float-e-margins">
+                <label class="col-md-2" for="contract_number"><h4>رقم العقد</h4></label>
+                <div class="col-md-4">
+                    <input id="number" name="number" placeholder="برجاء ادخال رقم العقد "
+                           class=" form-control"
+                           type="text" value="">
+                </div>
             </div>
-            <button class="col-md-2 btn btn-block btn-success" id="add_client"> إضافه عميل</button>
-            <span> الحد الائتمانى للعميل :</span>
-        </div>
-        <div class=" col-md-12 form-group float-e-margins">
-            <label class="col-md-2" for="location"><h4> الموقع</h4></label>
-            <div class="col-md-4">
-                <input id="location" name="location" placeholder="برجاء ادخال الموقع "
-                       class=" form-control"
-                       type="text" value="">
+
+            <div class=" col-md-12 form-group float-e-margins">
+                <label class="font-normal col-md-2"><h4>العميل</h4></label>
+                <div class="col-md-4">
+                    <select class="form-control" class="chosen-select" name="client_id" id="client_id">
+                        <option value="">إختر العميل</option>
+                        @if($clients)
+                            @foreach($clients as $client)
+                                <option value="{{$client->id}}">{{$client->name}}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+                <a href="AddClient">
+                    <button class="col-md-2 btn btn-block btn-success" type="button" id="add_client"> إضافه عميل
+                    </button>
+                </a>
+               <div id="credit_limit"></div>
             </div>
-        </div>
-        <div class=" col-md-12 form-group float-e-margins">
-            <label class="col-md-2" for="container_number"><h4> عدد الرحلات</h4></label>
-            <div class="col-md-4">
-                <input id="container_number" name="container_number" placeholder="برجاء ادخال عدد الرحلات "
-                       class=" form-control"
-                       type="number" value="">
+            <div class=" col-md-12 form-group float-e-margins">
+                <label class="col-md-2" for="address"><h4> الموقع</h4></label>
+                <div class="col-md-4">
+                    <input id="address" name="address" placeholder="برجاء ادخال الموقع "
+                           class=" form-control"
+                           type="text" value="">
+                </div>
             </div>
-        </div>
-        <div class=" col-md-12 form-group float-e-margins">
-            <label class="col-md-2" for="container_number"><h4>مده الرحله </h4></label>
-            <div class="col-md-4">
-                <input id="container_number" name="container_number" placeholder="برجاء ادخال مده الرحله الواحده باليوم "
-                       class=" form-control"
-                       type="number" value="">
+            <div class=" col-md-12 form-group float-e-margins">
+                <label class="col-md-2" for="num_of_containers"><h4> عدد الرحلات</h4></label>
+                <div class="col-md-4">
+                    <input id="number_of_containers" name="number_of_containers" placeholder="برجاء ادخال عدد الرحلات "
+                           class=" form-control"
+                           type="number" value="">
+                </div>
             </div>
-        </div>
-        <div class=" col-md-12 form-group float-e-margins">
-            <label class="font-normal col-md-2"><h4>فتره الايجار</h4></label>
-            <div class="col-md-8">
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label class="font-normal">من</label>
-                        <div class="input-group date">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                            <input type="text" class="form-control picker" value="">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="font-normal">إلى</label>
+            <div class=" col-md-12 form-group float-e-margins">
+                <label class="col-md-2" for="trip_days"><h4>مده الرحله </h4></label>
+                <div class="col-md-4">
+                    <input id="trip_days" name="trip_days"
+                           placeholder="برجاء ادخال مده الرحله الواحده باليوم "
+                           class=" form-control"
+                           type="number" value="">
+                </div>
+            </div>
+            <div class=" col-md-12 form-group float-e-margins">
+                <label class="font-normal col-md-2"><h4>فتره الايجار</h4></label>
+                <div class="col-md-8">
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="font-normal">من</label>
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
-                                        type="text" class="form-control picker" value="">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="date" class="form-control picker" name="from_date">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="font-normal">إلى</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="date" class="form-control picker-plus-3" name="to_date">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-            <div class=" col-md-12 form-group float-e-margins">
-                <label class="col-md-2" for="add_taxes"><h4> المبلغ </h4></label>
-                <div class="col-md-4">
-                    <span id="add_taxes" name="add_taxes" class="form-control" type="number" value="">
-
-
-                    </span>
+                <div class=" col-md-12 form-group float-e-margins">
+                    <label class="col-md-2" for="cost"><h4> المبلغ </h4></label>
+                    <div class="col-md-4">
+                        <input id="cost" name="cost" class="form-control" type="number">
+                    </div>
                 </div>
-            </div>
-            <div class=" col-md-12 form-group float-e-margins">
+                <div class=" col-md-12 form-group float-e-margins">
 
-                <label class="col-md-2"><h4>طريقه الدفع</h4></label>
-                <div class="col-md-5">
-                    <label class="col-md-1" for="radio1">مقدم</label>
-                    <div>
-                        <input class="col-md-3" type="radio" name="radio1" id="radio1" value="0"
-                               checked="checked">
+                    <label class="col-md-2"><h4>طريقه الدفع</h4></label>
+                    <div class="col-md-5">
+                        <label class="col-md-1" for="radio1">مقدم</label>
+                        <div>
+                            <input class="col-md-3" type="radio" name="type_of_payment" id="radio1" value="1">
+                        </div>
+                        <label class="col-md-1" for="radio2">اجل</label>
+                        <div>
+                            <input class="col-md-3" type="radio" name="type_of_payment" id="radio2" value="2">
+                        </div>
                     </div>
-                    <label class="col-md-1" for="radio2">اجل</label>
-                    <div>
-                        <input class="col-md-3" type="radio" name="radio1" id="radio2" value="1" checked="">
-                    </div>
+
                 </div>
 
             </div>
-
-            {{--<div class=" col-md-12 form-group float-e-margins">--}}
-            {{--<label class="col-md-2" for="add_fees"><h4>رسم الرحلات الاضافيه</h4></label>--}}
-            {{--<div class="col-md-4">--}}
-            {{--<input id="add_fees" name="add_fees" placeholder="برجاء ادخال المبلغ " class="form-control"--}}
-            {{--type="number"--}}
-            {{--value="">--}}
-            {{--</div>--}}
-            {{--</div>--}}
-
-
-        </div>
-        <button class="col-md-2 btn btn-block btn-success" style="" id="save_print">حفظ
-        </button>
+            <button class="col-md-2 btn btn-block btn-success" style="" id="save_print" type="submit">حفظ
+            </button>
+        </form>
     </div>
+
+    <div class="col-lg-8">
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </div>
+
+        @endif
+        @if(session()->has('success'))
+
+            <p class="alert alert-success">{{ session('success') }}</p>
+
+        @endif
+
+        @if(session()->has('error'))
+            <p class="alert alert-danger">{{ session('error') }}</p>
+
+        @endif
+    </div>
+@stop
+
+
+@section('scripts')
+    <script>
+
+        $(document).ready(function () {
+            $('#client_id').on('change', function () {
+                var client_id = $(this).val();
+
+                var data = {'client_id': client_id, '_token': '{{ csrf_token() }}'};
+
+                $.ajax({
+
+                    url: '{{ route('ajax.get-client-contracts') }}',
+                    type: 'post',
+                    data: data,
+                    success: function (response) {
+                        $('#credit_limit').empty().append(response.credit_limit);
+                    },
+                    error: function (error) {
+                        // console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
 @stop

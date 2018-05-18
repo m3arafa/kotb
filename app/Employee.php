@@ -17,4 +17,30 @@ class Employee extends Model
         'medical_insurance_end_date',
         'passport_end_date'
     ];
+
+    public function truck()
+    {
+        return $this->hasOne('App\Truck');
+    }
+
+    public function container_transactions()
+    {
+        return $this->hasMany('App\Container_Transaction');
+    }
+
+    public function rents()
+    {
+        return $this->belongsToMany('App\Rent');
+    }
+
+    public function commission_transaction()
+    {
+        return $this->belongsTo('App\Commission_Transaction');
+    }
+
+    public function spending_transactions()
+    {
+        return $this->hasMany('App\Spending_Transaction');
+    }
+
 }

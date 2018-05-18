@@ -9,7 +9,7 @@ migrati
         <div class="col-md-12" style="float: right;">
             <div class="col-md-4">
                 <label for="container_name"> رقم الحاويه</label>
-                <input type="text" id="container_name">
+                <input type="number" class="form-control" id="container_name">
             </div>
 
 
@@ -21,7 +21,7 @@ migrati
                             </div>
                             <div class="input-group date">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                <input id="from_date" type="text" class="form-control picker" value="">
+                                <input id="from_date" type="date" class="form-control picker" value="">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -31,7 +31,7 @@ migrati
                                 </div>
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
-                                            type="text" class="form-control picker" value="">
+                                            type="date" class="form-control picker" value="">
                                 </div>
                             </div>
                         </div>
@@ -52,6 +52,8 @@ migrati
 
     </div>
     <br>
+
+    {{--search results--}}
     <div class="">
         <div class="row">
             <div class="col-lg-12">

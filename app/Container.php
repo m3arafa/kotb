@@ -17,7 +17,18 @@ class Container extends Model
     ];
 
 
-    public function branch(){
-        $this->belongsTo('App\Branch');
+    public function branch()
+    {
+        return $this->belongsTo('App\Branch');
+    }
+
+    public function rents()
+    {
+        return $this->hasMany('App\Rent');
+    }
+
+    public function container_transactions()
+    {
+        return $this->hasMany('App\Container_Transaction');
     }
 }

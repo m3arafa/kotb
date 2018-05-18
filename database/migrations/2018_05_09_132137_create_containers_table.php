@@ -15,9 +15,9 @@ class CreateContainersTable extends Migration
     {
         Schema::create('containers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('number');
+            $table->integer('number')->unique();
             $table->integer('branch_id');
-            $table->boolean('is_empty')->nullable();
+            $table->boolean('is_empty')->nullable()->default(1); // 1 = true 0 = false
             $table->string('address')->nullable();
             $table->integer('size');
             $table->timestamps();

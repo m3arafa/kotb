@@ -12,4 +12,9 @@ class Spending extends Model
         'name',
         'value'
     ];
+
+    public function spending_transactions()
+    {
+        return $this->hasMany('App\Spending_Transaction');
+    }
 }

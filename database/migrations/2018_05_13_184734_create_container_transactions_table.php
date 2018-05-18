@@ -16,12 +16,14 @@ class CreateContainerTransactionsTable extends Migration
         Schema::create('container_transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id');
-            $table->integer('client_id');
-            $table->integer('contract_id');
+            $table->integer('client_id')->nullable();
+            $table->integer('contract_id')->nullable();
             $table->integer('container_id');
+            $table->integer('bill_number');
             $table->integer('employee_commission')->nullable();
-            $table->integer('address')->nullable();
+            $table->string('address')->nullable();
             $table->integer('type_of_transaction');
+            $table->date('transaction_date');
             $table->timestamps();
         });
     }
